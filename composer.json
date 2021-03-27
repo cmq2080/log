@@ -1,0 +1,24 @@
+{
+    "name": "cmq2080/mr_logger",
+    "description": "日志工具类库",
+    "type": "library",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "php": ">=5.4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Temple Chan",
+            "email": "cmq2080@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "mr_logger\\": "src/"
+        }
+    }
+}
