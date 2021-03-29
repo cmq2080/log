@@ -83,12 +83,13 @@ class Log
             mkdir($dirname);
         }
 
-        $filename = date('d');
+        // 找文件名
+        $filename = date('d') . '_' . $level;
         $writeMode = $this->config->get('write_mode');
-        if ($writeMode === self::WRITE_MODE_NORMAL) {
-            $filename .= '_' . $level;
-        } else if ($writeMode === self::WRITE_MODE_IN_ONE) {
+        if ($writeMode === self::WRITE_MODE_IN_ONE) {
+            $filename = date('d');
         }
+        // 加扩展名
         $extension = $this->config->get('extension');
         $filename .= '.' . ltrim($extension, '.');
 
@@ -99,7 +100,8 @@ class Log
     {
         // 异常类自动转换文本
         if ($content instanceof \Exception) {
-            $content = date('Y-m-d H:i:s') . ' - line ' . $content->getLine() . ' in ' . $content->getFile() . ':<span style="' . $this->getStyle(self::LEVEL_ERROR) . '">' . $content->getMessage() . "</span><br>\n" . $content->getTraceAsString();
+            $content = 'Exception:' . $content->getMessage() . ' at line ' . $content->getLine() . ' in ' . $content->getFile() .
+                "<br>\n" . $content->getTraceAsString();
         }
 
         // 不是字符串的直接JSON序列化
